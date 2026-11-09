@@ -2,7 +2,7 @@
 Parasoft DTP on Docker Desktop or WSL Docker Engine or Physical Machine
 
 Docker Desktop version or under WSL with docker Engine.
-MachineID is not stable but restarting the container or Docker does not hurm it - it is fixed.
+MachineID is not stable but restarting the container or Docker does not harm it - it is fixed.
 MachineID can be permanent on not virtualize machine(Docker Desktop, WSL) - see service DTP and volume.
 To have permanent and stable machineID you need to use physical machine not virtualize one.
 This Yaml is to demonstrate how to create containers and services - it is not a guide.
