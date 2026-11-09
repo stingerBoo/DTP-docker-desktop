@@ -29,26 +29,7 @@ To ensure a clean build, clear old cached data by running:
 ```bash
 sudo docker builder prune -a -f
 ```
-
-### 2. Create Images and Containers (Mandatory)
-Navigate to the folder containing your YAML file and choose **one** of the following options to deploy:
-
-*   **Option 1: Standard Recreate (Recommended)**
-    ```bash
-    sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
-    ```
-*   **Option 2: Build from Scratch** (Use this if you ran the optional `prune` command above)
-    ```bash
-    sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build
-    ```
-*   **Option 3: Legacy Docker Compose** (For older Docker versions)
-    ```bash
-    sudo docker-compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
-    ```
-
----
-
-## Configuration & Certificates
+### 2. Configuration & Certificates
 
 ### SSL Certificates
 You must use **CA-signed certificates**, not self-signed ones. Place them in the following paths:
@@ -81,3 +62,21 @@ You must use **CA-signed certificates**, not self-signed ones. Place them in the
     *   Configuring Tomcat `server.xml` certificates.
     *   Configuring Extension Designer certificates (`ssl.config.js`).
     *   Injecting third-party MySQL connector libraries.
+      
+### 3. Create Images and Containers (Mandatory)
+Navigate to the folder containing your YAML file and choose **one** of the following options to deploy:
+
+*   **Option 1: Standard Recreate (Recommended)**
+    ```bash
+    sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
+    ```
+*   **Option 2: Build from Scratch** (Use this if you ran the optional `prune` command above)
+    ```bash
+    sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build
+    ```
+*   **Option 3: Legacy Docker Compose** (For older Docker versions)
+    ```bash
+    sudo docker-compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
+    ```
+
+---
