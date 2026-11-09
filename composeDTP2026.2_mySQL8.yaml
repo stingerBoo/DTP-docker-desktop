@@ -5,11 +5,6 @@
 # sudo docker builder prune -a -f
 
 # --- Mandatory ---
-# -- Create Images and Containers -- (3 options, use one of them)
-# 1. Run command from folder where file exists in WSL using: sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
-# 2. Build from scratch if you use the above optional option prune: sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build
-# 3. Older version: sudo docker-compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
-
 # Description of 4 services and global variable with network
 # === Global variable with network === :
 # 1. Contains internal IP addresses of the containers and link services
@@ -33,6 +28,11 @@
 # Certificates - you need to use SIGNED certificates, not self-signed
 # "dockerDTP_cert2026\yourPrivateKey.crt"
 # "dockerDTP_cert2026\yourPrivateKey.key"
+
+# -- Create Images and Containers -- (3 options, use one of them)
+# 1. Run command from folder where file exists in WSL using: sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
+# 2. Build from scratch if you use the above optional option prune: sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build
+# 3. Older version: sudo docker-compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
 
 # After you run the docker compose you should see DTP to add license, after that the connection with mySQL should be successful. 
 # Restart only the DTP container. Done.
