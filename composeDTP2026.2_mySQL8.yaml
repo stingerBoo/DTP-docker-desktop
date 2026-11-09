@@ -108,7 +108,6 @@ services:
     build: ./dockerMysql
     image: i_support/mysql8_2026.2
     container_name: c_mysql8_2026.2
-    #network_mode: network2026_2_v9
     networks:
       - network1
     restart: no
