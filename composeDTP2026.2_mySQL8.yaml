@@ -44,7 +44,7 @@ x-config:
   subnet: &subnet "172.31.0.0/16"
   gateway: &gateway "172.31.0.1"
   dtpConfigVolume: &dtpConfigVolume "/mnt/yourHostPath/folderWithThisYamlFile/dockerDTP/conf:/usr/local/parasoft/data/conf"
-  # Globalna nazwa pliku konfiguracyjnego
+  # The file will be configured with the above IP addresses to work properly with MySQL.
   configFilename: &configFilename "PSTRootConfig.xml"
 
 services:
