@@ -26,7 +26,7 @@ If this is a fresh Docker installation:
 
 ### Global Network Configuration - the last option "networks:"
 *   Manages internal IP addresses for container communication and service linking - global variables in "x-config:".
-*   Acts as the mandatory backbone network for all deployed services.
+*   This is for internal use of the network.
 
 ### Services Description
 
