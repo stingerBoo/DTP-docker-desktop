@@ -57,11 +57,6 @@ sudo docker builder prune -a -f
 You must use **CA-signed certificates**, not self-signed ones. Place them in the following paths:
 *   `dockerDTP_cert2026/yourPrivateKey.crt`
 *   `dockerDTP_cert2026/yourPrivateKey.key`
-
-### Post-Deployment Checklist
-1. Once `docker compose` finishes running, open the DTP web interface to add your license.
-2. Verify that the connection to MySQL is successful.
-3. **Restart only the DTP container** to finalize the setup. Done!
       
 ### 3. Create Images and Containers (Mandatory)
 Navigate to the folder containing your YAML file and choose **one** of the following options to deploy:
@@ -78,5 +73,10 @@ Navigate to the folder containing your YAML file and choose **one** of the follo
     ```bash
     sudo docker-compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
     ```
+    
+### Post-Deployment Checklist
+1. Once `docker compose` finishes running, open the DTP web interface to add your license.
+2. Verify that the connection to MySQL is successful.
+3. **Restart only the DTP container** to finalize the setup. Done!
 
 ---
