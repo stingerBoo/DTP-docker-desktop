@@ -22,6 +22,28 @@ If this is a fresh Docker installation:
 
 ---
 
+## Architecture Overview
+
+### Global Network Configuration - the last option "networks:"
+*   Manages internal IP addresses for container communication and service linking - global variables in "x-config:".
+*   Acts as the mandatory backbone network for all deployed services.
+
+### Services Description
+
+*   **`config-automator`**  
+    Automatically updates the `PSTRootConfig.xml` file with the correct IP addresses, which is critical for MySQL connectivity.
+*   **`mySQL_8`**  
+    Deploys the MySQL container and initializes the DTP database using the startup script located at `dockerMysql/create.sql`.
+*   **`mongoDB`**  
+    Required database backend for the DTP Extension Designer.
+*   **`DTP`**  
+    Manages the core Parasoft DTP application and associated files (defined in `dockerDTP/Dockerfile`). It handles:
+    *   Configuring Tomcat `server.xml` certificates.
+    *   Configuring Extension Designer certificates (`ssl.config.js`).
+    *   Injecting third-party MySQL connector libraries.
+      
+---
+
 ## Deployment Steps
 
 ### 1. Clear Old Cache (Optional)
@@ -40,28 +62,6 @@ You must use **CA-signed certificates**, not self-signed ones. Place them in the
 1. Once `docker compose` finishes running, open the DTP web interface to add your license.
 2. Verify that the connection to MySQL is successful.
 3. **Restart only the DTP container** to finalize the setup. Done!
-
----
-
-## Architecture Overview
-
-### Global Network Configuration
-*   Manages internal IP addresses for container communication and service linking.
-*   Acts as the mandatory backbone network for all deployed services.
-
-### Services Description
-
-*   **`config-automator`**  
-    Automatically updates the `PSTRootConfig.xml` file with the correct IP addresses, which is critical for MySQL connectivity.
-*   **`mySQL_8`**  
-    Deploys the MySQL container and initializes the DTP database using the startup script located at `dockerMysql/create.sql`.
-*   **`mongoDB`**  
-    Required database backend for the DTP Extension Designer.
-*   **`DTP`**  
-    Manages the core Parasoft DTP application and associated files (defined in `dockerDTP/Dockerfile`). It handles:
-    *   Configuring Tomcat `server.xml` certificates.
-    *   Configuring Extension Designer certificates (`ssl.config.js`).
-    *   Injecting third-party MySQL connector libraries.
       
 ### 3. Create Images and Containers (Mandatory)
 Navigate to the folder containing your YAML file and choose **one** of the following options to deploy:
