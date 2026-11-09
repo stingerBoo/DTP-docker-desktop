@@ -1,6 +1,6 @@
 # Parasoft DTP on Docker Desktop / WSL
 
-This project demonstrates how to deploy **Parasoft DTP** using Docker Desktop, WSL Docker Engine, or a physical machine. 
+This project demonstrates how to deploy **Parasoft DTP with Extension Designer** using Docker Desktop, WSL Docker Engine, or a physical machine. 
 
 *Note: This YAML configuration is intended as a demonstration for creating containers and services, not a comprehensive production guide.*
 
