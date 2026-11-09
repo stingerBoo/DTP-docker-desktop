@@ -1,0 +1,12 @@
+{
+    "enabled": false,
+    "provider": "openAi",
+    "openAiSettings": {
+        "apiKey": "api key"
+    },
+    "azureOpenAiSettings": {
+        "apiKey": "api key",
+        "resourceName": "azure resource",
+        "embeddingsDeploymentName": "deployment name"
+    }
+}

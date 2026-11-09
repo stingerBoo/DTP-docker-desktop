@@ -1,0 +1,6 @@
+{
+    "enabled": false,
+    "maxLoginFailures": 5,
+    "failurePersistenceDurationInSeconds": 5,
+    "lockoutDurationInSeconds": 1800
+}

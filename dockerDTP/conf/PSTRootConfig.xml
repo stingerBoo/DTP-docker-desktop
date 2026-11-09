@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root-config>
+  <config-version>120</config-version>
+  <!-- This flag will be removed after the first DTP launch -->
+  <dtp-fresh-install>false</dtp-fresh-install>
+  <!-- Specifies if DTP user login names should be treated case-sensitive
+    This affects multiple areas i.e. login procedure, Parasoft automated test results, etc. -->
+  <case-sensitive>true</case-sensitive>
+  <strict-mode>false</strict-mode>
+  <cloud-version>true</cloud-version>
+  <!-- This setting applies only when connecting DTP to the embedded database. -->
+  <embedded-db enabled="false"/>
+  <!-- Changing db-connection parameter requires DTP and Data Collector to be restarted. -->
+  <!-- These settings apply only when connecting DTP to an external database (non-embedded DB). -->
+  <dtp-db-connection>
+    <db-type>MYSQL</db-type>
+    <user>root</user>
+    <password encrypted="true">wdZax5aLxl66vGX4cDQNqQ==</password>
+    <!-- sample Oracle connection url:   <url>jdbc:oracle:thin:@HOST:PORT:SID</url>   -->
+    <!-- sample MySQL connection url:   <url>jdbc:mysql://HOST:PORT/DATABASE</url>   -->
+    <!-- sample PostgreSQL connection url:   <url>jdbc:postgresql://HOST:PORT/DATABASE</url>   -->
+    <url>jdbc:mysql://172.31.0.1:3310/DTP</url>
+  </dtp-db-connection>
+  <ssl-enabled>false</ssl-enabled>
+  <!--   Configures which applications are visible -->
+  <!--     <visible-apps> -->
+  <!--        <report-center>true</report-center> -->
+  <!--        <team-server>false</team-server> -->
+  <!--        <license-server>true</license-server> -->
+  <!--        <user-administration>true</user-administration> -->
+  <!--     </visible-apps> -->
+  <!-- Determines the default base URI used to access the server UI. -->
+  <!-- The base URI will be based upon the request URI if a valid URI value is not set. -->
+  <!-- This value will be used even in reverse proxy environments. -->
+  <!-- Note: for single sign on, use the fully qualified domain name as in example below. -->
+  <!-- <default-server-url>http://hostname.company.com:8080</default-server-url> -->
+  <!-- Configure the port used for DTP's session database. The default is
+         9003.  Normally you would not need to set this port unless the
+         default is already in use on your machine. -->
+  <!-- <session-database-port>9003</session-database-port> -->
+  <!-- The session timeout duration in minutes. The default is 600 (10 hours).
+         The session timeout will be disabled if set to a negative value. -->
+  <!-- <session-timeout>600</session-timeout> -->
+  <is-eula-accepted>true</is-eula-accepted>
+  <usage-reporting-enabled last-choice-version="2026.2">false</usage-reporting-enabled>
+</root-config>

@@ -1,0 +1,21 @@
+<external-api-whitelist>
+<!--
+  Add <host> elements to list the servers allowed in calls by the
+  external API processor.  DTP will make a best effort to match any host
+  aliases and IP addresses.  For example, if you have host1.company.com that
+  has an IP address of 10.1.1.57 and host1 resolves to the same IP address on
+  the DTP server, then if you add <host>host1.company.com</host> DTP will
+  allow requests to host1.company.com, 10.1.1.57, and host1.  There is no
+  guarantee as to what aliases DTP will be able to match, as this depends on
+  how the DTP server can make DNS lookups.  The best practice is to add
+  fully qualified domain names (such as host1.parasoft.com).  If you must
+  guarantee that a certain alias or IP is matched, then add that as another
+  <host> entry to this file.
+  
+  You do not need to add <host>localhost</host>.  DTP allows requests to the
+  loopback host name and IP address.
+-->
+    
+    <!-- <host>host1.company.com</host> -->
+    <!-- <host>192.168.1.101</host> -->
+</external-api-whitelist>

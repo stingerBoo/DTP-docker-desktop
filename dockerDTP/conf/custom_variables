@@ -1,0 +1,21 @@
+# Use this file to override settings in install_dir/bin/variables.
+
+# Example: Set DTP max memory usage to 16 GB.
+# JAVA_MEM="-Xms2g -Xmx16g -XX:+HeapDumpOnOutOfMemoryError"
+
+# Example: Set DTP to use max 50% of memory.
+# JAVA_MEM="-XX:MaxRAMPercentage=50 -XX:InitialRAMPercentage=25"
+
+# Example: Enable deleting DTP project data.
+# JAVA_CONFIG_ARGS="-Dcom.parasoft.sdm.storage.managers.admin.enable.delete.project.data=true"
+
+# Example: Set Data Collector max memory usage to 16 GB.
+# JAVA_DC_MEM="-Xms2g -Xmx16g -XX:+HeapDumpOnOutOfMemoryError"
+
+# Example: Set Data Collector to use max 40% of memory.
+# JAVA_DC_MEM="-XX:MaxRAMPercentage=40 -XX:InitialRAMPercentage=25"
+
+# Example: To allow Data Collector to store reports that contain up to
+# 10,000 failures and store SOAtest traffic payloads up to 20,000
+# characters.
+# JAVA_DC_CONFIG_ARGS="-Dcom.parasoft.sdm.rawstorage.failures.limit=10000 -Dcom.parasoft.sdm.dc.traffic.max.length=200000"

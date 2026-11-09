@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Example",
+    "enabled": false,
+    "enableGroupImport": true,
+    "connection": {
+      "hostname": "localhost",
+      "port": 10389,
+      "useSSL": false,
+      "credentials": {
+        "username": "uid=admin,ou=system",
+        "password": "secret"
+      }
+    },
+    "userImport": {
+      "base": "ou=people,dc=example,dc=com",
+      "filter": "(objectclass=person)",
+      "attributes": {
+        "username": "uid",
+        "firstName": "cn",
+        "lastName": "sn",
+        "email": "mail",
+        "memberOf": "memberOf"
+      }
+    },
+    "groupImport": {
+      "base": "ou=groups,dc=example,dc=com",
+      "filter": "(objectclass=groupOfNames)",
+      "attributes": {
+        "name": "cn",
+        "description": "cn",
+        "member": "member"
+      }
+    },
+    "advanced": {
+      "referral": "follow",
+      "pageSize": "1000",
+      "userSearchScope": "subtree",
+      "groupSearchScope": "subtree"
+    }
+  }
+]

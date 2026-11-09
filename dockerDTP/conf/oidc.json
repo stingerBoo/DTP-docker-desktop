@@ -1,0 +1,14 @@
+{
+    "enabled": false,
+    "issuerUri": "your issuer uri",
+    "clientId": "your client id",
+    "clientSecret": "your client secret",
+    "scopes": ["openid", "profile", "email"],
+    "claimMappings": {
+        "username": "preferred_username",
+        "firstName": "given_name",
+        "lastName": "family_name",
+        "email": "email"
+    },
+    "adminUsers": []
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root-config>
+    <dc-server-port>8082</dc-server-port>
+    
+    <!-- https/http -->
+    <dc-server-protocol>https</dc-server-protocol>
+
+	<!-- comma separated list of protocols to exclude
+		By default, TLSv1, TLSv1.1 are excluded -->
+    <excluded-ssl-protocols>TLSv1,TLSv1.1</excluded-ssl-protocols>
+    
+	<!-- comma separated list of cipher suites to exclude -->
+    <excluded-cipher-suites></excluded-cipher-suites>
+    
+    
+    <!--  main-app-server-http-port is used when server.xml of main app or convenient ports in server.xml cannot be found -->
+    <main-app-server-http-port>80</main-app-server-http-port>
+    
+    <!--  main-app-server-https-port is used when server.xml of main app or convenient ports in server.xml cannot be found -->
+    <main-app-server-https-port>443</main-app-server-https-port>
+    
+    <!-- Access log pattern for recording traffic -->
+    <access-log-pattern>%t %s %m %U %H %u %sid %{local}a:%{local}p %{remote}a:%{remote}p %{ms}T %{X-Forwarded-For}i %{User-Agent}i %{Referer}i</access-log-pattern>
+</root-config>

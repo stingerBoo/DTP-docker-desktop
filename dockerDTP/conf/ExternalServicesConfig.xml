@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<external-services>
+  <processIntelligenceEngine>
+    http://localhost:8314
+    <url>https://17afa23fc3df:8314</url>
+  </processIntelligenceEngine>
+</external-services>

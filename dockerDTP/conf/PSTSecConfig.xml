@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pstsec-config>
+  <password-required>true</password-required>
+  <remote-authentication>
+    <enabled>false</enabled>
+    <host>localhost</host>
+    <port>80</port>
+  </remote-authentication>
+  <!-- 
+      This option determines if HMAC Authentication is enabled for REST services.
+      If HMAC is enabled, then the provided secret value will be used as the private key
+      to construct the message's digital signature. 
+      NOTE: Using HMAC Authentication will allow access to the REST services, but it does
+      not determine if the client is authorized to do so.
+  -->
+  <hmac enabled="true">
+      <secret encrypted="true">oqYc5cSbn19l0LzVt3/z9Q==</secret>
+  </hmac>
+</pstsec-config>

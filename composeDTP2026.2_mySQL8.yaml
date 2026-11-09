@@ -1,0 +1,175 @@
+# Docker Desktop version or under WSL with docker Engine.
+# MachineID is not stable but restarting the container or Docker does not hurm it - it is fixed.
+# MachineID can be permanent on not virtualize machine(Docker Desktop, WSL) - see service DTP and volume.
+# To have permanent and stable machineID you need to use physical machine not virtualize one.
+# This Yaml is to demonstrate how to create containers and services - it is not a guide.
+
+# If it's a fresh instalation of Docker, download in WSL version of Ubuntu at least 20.04 and make it default.
+# --- Optional ---
+# Restart Docker desktop tool.
+# remove old cached data:
+# sudo docker builder prune -a -f
+
+# --- Mandatory ---
+# -- Create Images and Containers -- (3 options, use one of them)
+# 1. run command from folder where file exists in WSL using: sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
+# 2. build from scratch if you use above optional option prune: sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build
+# 3. older version: sudo docker-compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
+
+# Description of 4 services and global variable with network
+# === Global variable with network === :
+# 1. Contains internal IP addresses of the containers and link services
+# 2. The last is network which is a mandatory for all services
+
+# === Service config-automator === :
+# Adjusting the file "PSTRootConfig.xml" by changing the IP address - important for mySQL
+
+# === Service mySQL_8 === :
+# Creates container and DTP database from script(dockerMysql/create.sql)
+
+# === Service mongoDB === :
+# Need for DTP Extension Designer
+
+# === Service DTP === :
+# Creates the DTP and managing some files - see "dockerDTP/Dockerfile"
+# Adjusting the Tomcat server.xml certificates
+# Adjusting the certificates for Extension Designer - file ssl.config.js
+# Adding third party liblary for mySQL
+
+# Certificates - you need to use SIGN serficates, not self-sign
+# "dockerDTP\_cert2026\yourPrivateKey.crt"
+# "dockerDTP\_cert2026\yourPrivateKey.key"
+
+# After you run the docker compose you should see DTP to add license, after that the connection with mySQL should be with success. 
+# Restart only the DTP conteiner. Done.
+
+
+
+name: services_2026.2_DTP-mongoDB-mySQL
+
+# 1. Definicja zmiennych globalnych
+x-config:
+  subnet: &subnet "172.31.0.0/16"
+  gateway: &gateway "172.31.0.1"
+  dtpConfigVolume: &dtpConfigVolume "/mnt/yourHostPath/folderWithThisYamlFile/dockerDTP/conf:/usr/local/parasoft/data/conf"
+  # Globalna nazwa pliku konfiguracyjnego
+  configFilename: &configFilename "PSTRootConfig.xml"
+
+services:
+# Service adjust the PSTRootConfig.xml
+  config-automator:
+    image: busybox
+    container_name: config_automator
+    user: "0:0"
+    environment:
+      GATEWAY_IP: *gateway
+      VOLUME_MAPPING: *dtpConfigVolume
+      # Transfers name of the file from global variable
+      CONFIG_FILENAME: *configFilename
+    volumes:
+      - *dtpConfigVolume
+    networks:
+      - network1
+    command:
+      - sh
+      - -c
+      - |
+        echo "=== Starting Update ==="
+        
+        # Exclude container's path and link with globalname of the file
+        CONTAINER_PATH=$$(echo "$$VOLUME_MAPPING" | cut -d':' -f2)
+        FILE="$$CONTAINER_PATH/$$CONFIG_FILENAME"
+        TEMP_FILE="/tmp/$$CONFIG_FILENAME"
+        
+        echo "Target file path resolved to: $$FILE"
+        
+        if [ ! -f "$$FILE" ]; then
+          echo "ERROR: File not found at $$FILE"
+          exit 1
+        fi
+
+        echo "File found! Copying to container RAM for processing..."
+        cp "$$FILE" "$$TEMP_FILE"
+
+        echo "Modifying ONLY the last URL line in temp file..."
+        LAST_LINE_NUM=$$(grep -n 'jdbc:mysql' "$$TEMP_FILE" | tail -n 1 | cut -d: -f1)
+        
+        if [ -n "$$LAST_LINE_NUM" ]; then
+          echo "Targeting line number: $$LAST_LINE_NUM"
+          sed -i "$${LAST_LINE_NUM}s|.*jdbc:mysql:.*|    <url>jdbc:mysql://$$GATEWAY_IP:3310/DTP</url>|" "$$TEMP_FILE"
+          
+          echo "Applying changes back to host file..."
+          chmod 666 "$$FILE"
+          
+          cp -f "$$TEMP_FILE" "$$FILE"
+          rm "$$TEMP_FILE"
+        else
+          echo "ERROR: No connection string found to update."
+          exit 1
+        fi
+        
+        echo "Verification of the HOST file from inside container:"
+        grep 'jdbc:mysql' "$$FILE"
+        echo "Configuration step complete!"
+# Service mySQL 8
+  mySQL_8:
+    build: ./dockerMysql
+    image: i_support/mysql8_2026.2
+    container_name: c_mysql8_2026.2
+    #network_mode: network2026_2_v9
+    networks:
+      - network1
+    restart: no
+    ports:
+      - "3310:3306"
+      
+# Service MongoDB      
+  mongoDB:
+    # it works in 2026 11 with DTP 2026.2 which was 9.0.4
+    #image: mongo:latest
+    image: mongo:8.0
+    container_name: mongodb
+    networks:
+      - network1
+    restart: no
+    ports:
+      - "27017:27017"
+      
+# service DTP      
+  DTP2026.2:    
+    build: ./dockerDTP
+    image: i_support/dtp2026.2
+    container_name: c_dtp2026.2
+    networks:
+      - network1
+    restart: no      
+    ports:
+      - "8314-8399:8314-8399"
+      - "8080:8080"
+      - "8443:8443"
+      - "8082:8082"
+      - "2002:2002"
+      - "443:443"
+    volumes:
+      # Uncomment below docker.sock if you are not in virtualize environment
+      #- /var/run/docker.sock:/var/run/docker.sock 
+      - ./container/data:/usr/local/parasoft/data
+      - *dtpConfigVolume
+    environment:      
+      - JDBC_DRIVER_URL=https://maven.org      
+      - DEP_USE_REMOTE_DB=true
+      - DEP_DB_HOSTNAME=mongodb
+      - DEP_DB_PORT=27017
+    depends_on:
+      - config-automator
+      - mongoDB
+      - mySQL_8
+
+networks:
+  network1:
+    name: network2026_2
+    driver: bridge
+    ipam:
+      config:
+        - subnet: *subnet
+          gateway: *gateway

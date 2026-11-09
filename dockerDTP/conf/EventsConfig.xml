@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<events-configuration>
+	<transport-connector port="61617" />
+    <transport-connector port="1883" protocol="mqtt"/>
+    <topic-authentication enabled="true" encrypted="true" password="CvucIvzTQtQrXy0X/55/+lDR4HHkLkaVWmg1vokwi1g=" username="2Ka48SueR6hewNjCYxJy5I6o8vsIhS+n3N0up982F/U="/>
+</events-configuration>

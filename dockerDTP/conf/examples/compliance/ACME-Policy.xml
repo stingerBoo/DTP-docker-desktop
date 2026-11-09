@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Compliance name="ACME Company Coding Standards Policy">
+    <ComplianceCategory groupId="SECURITY" name="ACME Security">
+        <!-- Security only rules -->
+
+        <RulePattern pattern="SECURITY-.*"/>
+        <RulePattern pattern="SECURITY\..*"/>
+
+        <RulePattern pattern="BD-SECURITY-.*"/>
+        <RulePattern pattern="BD\.SECURITY\..*"/>
+
+        <RulePattern pattern="SEC\..*"/>
+        
+        <RulePattern pattern="SPR\..*"/>
+    </ComplianceCategory>
+    <ComplianceCategory groupId="PERFORMANCE" name="ACME Performance">
+        <RulePattern pattern="OPT-.*"/>
+        <RulePattern pattern="OPT\..*"/>
+
+        <RulePattern pattern="BD-OPT-.*"/>
+        <RulePattern pattern="BD\.OPT\..*"/>
+    </ComplianceCategory>
+    <ComplianceCategory groupId="INTERNATIONALIZATION" name="ACME Internationalization">
+        <!-- Rules related to internationalization --> 
+        <!-- C++ test - no rules -->
+        <RulePattern pattern="INTER\..*"/>
+
+        <RulePattern analyzer="com.parasoft.dottest" pattern="CS\.INTER\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="VB\.INTER\..*"/>
+    </ComplianceCategory>
+    <ComplianceCategory groupId="POSSIBLE_BUGS" name="ACME Possible Bugs">
+        <!--
+        All rules that are capable to detect bugs.
+        This should cover more than just 'Possible Bugs' rule category from tools, I think.
+        --> 
+        <RulePattern pattern="PB-.*"/>
+        <RulePattern pattern="BD-PB-.*"/>
+
+        <RulePattern pattern="PB\..*"/>
+        <RulePattern pattern="BD\.PB\..*"/>
+
+        <RulePattern pattern="BD\.CO\..*"/>
+        <RulePattern pattern="BD\.TRS\..*"/>
+        <RulePattern pattern="BD\.EXCEPT\..*"/>
+
+        <RulePattern pattern="INIT-.*"/>
+        <RulePattern pattern="INIT\..*"/>
+
+        <RulePattern pattern="SERIAL\..*"/>
+
+        <RulePattern analyzer="com.parasoft.dottest" pattern="CS\.PB\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="VB\.PB\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="OPU\..*"/>
+
+    </ComplianceCategory>
+    <ComplianceCategory groupId="MEMORY_ISSUES" name="ACME Memory and Resource Leaks">
+        <!--
+        Leakages of memory, resources.
+        --> 
+        <RulePattern pattern="MRM-.*"/>
+        <RulePattern pattern="BD-RES-.*"/>
+        <RulePattern pattern="BD\.RES\..*"/>
+
+        <RulePattern pattern="GC\..*"/>
+
+        <RulePattern analyzer="com.parasoft.dottest" pattern="IFD\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="CS\.IFD\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="VB\.IFD\..*"/>
+
+    </ComplianceCategory>
+    <ComplianceCategory groupId="CODE_MAINTAINABILITY" name="ACME Code Maintainability">
+     <!-- Includes:
+        * Naming issues
+        * Code design
+        * White-chars management
+        * Lines length
+        * Metrics and object-oriented-metrics       
+     -->
+        <RulePattern pattern="COMMENT-.*"/>
+        <RulePattern pattern="COMMENT\..*"/>
+        
+        <RulePattern pattern="CODSTA-.*"/>
+        <RulePattern pattern="CODSTA\..*"/>
+        
+        <RulePattern pattern="FORMAT-.*"/>
+        <RulePattern pattern="FORMAT\..*"/>
+        
+        <RulePattern analyzer="com.parasoft.dottest" pattern="BRM\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="CS\.BRM\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="VB\.BRM\..*"/>
+
+        <RulePattern pattern="METRICS-.*"/>
+        <RulePattern pattern="OOP\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="OOM\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="CS\.OOM\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="VB\.OOM\..*"/>
+
+        <RulePattern pattern="NAMING-.*"/>
+        <RulePattern pattern="NAMING\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="NG\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="CS\.NG\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="VB\.NG\..*"/>
+
+        <RulePattern pattern="PORT-.*"/>
+        <RulePattern pattern="PORT\..*"/>
+        
+        <RulePattern pattern="PFO-.*"/>
+        <RulePattern pattern="PREPROC-.*"/>
+
+        <RulePattern analyzer="com.parasoft.dottest" pattern="ARRU\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="CLS\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="CMUG\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="CS\.CMUG\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="CS\.EU\..*"/>
+
+        <RulePattern analyzer="com.parasoft.dottest" pattern="COM\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="ERR\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="EXCEPT\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="OPU\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="CS\.OPU\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="VB\.OPU\..*"/>
+        <RulePattern analyzer="com.parasoft.dottest" pattern="TUG\..*"/>
+    </ComplianceCategory>
+</Compliance>
