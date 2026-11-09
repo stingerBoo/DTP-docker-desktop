@@ -1,43 +1,41 @@
-# If it's a fresh instalation of Docker, download in WSL version of Ubuntu at least 20.04 and make it default.
+# If it's a fresh installation of Docker, download a WSL version of Ubuntu at least 20.04 and make it default.
 # --- Optional ---
-# Restart Docker desktop tool.
-# remove old cached data:
+# Restart Docker Desktop tool.
+# Remove old cached data:
 # sudo docker builder prune -a -f
 
 # --- Mandatory ---
 # -- Create Images and Containers -- (3 options, use one of them)
-# 1. run command from folder where file exists in WSL using: sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
-# 2. build from scratch if you use above optional option prune: sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build
-# 3. older version: sudo docker-compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
+# 1. Run command from folder where file exists in WSL using: sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
+# 2. Build from scratch if you use the above optional option prune: sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build
+# 3. Older version: sudo docker-compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
 
 # Description of 4 services and global variable with network
 # === Global variable with network === :
 # 1. Contains internal IP addresses of the containers and link services
-# 2. The last is network which is a mandatory for all services
+# 2. The last is network which is mandatory for all services
 
 # === Service config-automator === :
 # Adjusting the file "PSTRootConfig.xml" by changing the IP address - important for mySQL
 
 # === Service mySQL_8 === :
-# Creates container and DTP database from script(dockerMysql/create.sql)
+# Creates container and DTP database from script (dockerMysql/create.sql)
 
 # === Service mongoDB === :
-# Need for DTP Extension Designer
+# Needed for DTP Extension Designer
 
 # === Service DTP === :
-# Creates the DTP and managing some files - see "dockerDTP/Dockerfile"
+# Creates the DTP and manages some files - see "dockerDTP/Dockerfile"
 # Adjusting the Tomcat server.xml certificates
 # Adjusting the certificates for Extension Designer - file ssl.config.js
-# Adding third party liblary for mySQL
+# Adding third-party library for mySQL
 
-# Certificates - you need to use SIGN serficates, not self-sign
-# "dockerDTP\_cert2026\yourPrivateKey.crt"
-# "dockerDTP\_cert2026\yourPrivateKey.key"
+# Certificates - you need to use SIGNED certificates, not self-signed
+# "dockerDTP_cert2026\yourPrivateKey.crt"
+# "dockerDTP_cert2026\yourPrivateKey.key"
 
-# After you run the docker compose you should see DTP to add license, after that the connection with mySQL should be with success. 
-# Restart only the DTP conteiner. Done.
-
-
+# After you run the docker compose you should see DTP to add license, after that the connection with mySQL should be successful. 
+# Restart only the DTP container. Done.
 
 name: services_2026.2_DTP-mongoDB-mySQL
 
