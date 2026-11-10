@@ -13,7 +13,7 @@
 
 name: services_2026.2_DTP-mongoDB-mySQL
 
-# 1. Global variables
+# Global variables
 x-config:
   # Custom address for mySQL and file PSTRootConfig.xml
   subnet: &subnet "172.31.0.0/16"
