@@ -39,7 +39,7 @@
 
 name: services_2026.2_DTP-mongoDB-mySQL
 
-# 1. Definicja zmiennych globalnych
+# 1. Global variables
 x-config:
   subnet: &subnet "172.31.0.0/16"
   gateway: &gateway "172.31.0.1"
