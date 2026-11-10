@@ -1,33 +1,7 @@
-# If it's a fresh installation of Docker, download a WSL version of Ubuntu at least 20.04 and make it default.
-# --- Optional ---
-# Restart Docker Desktop tool.
-# Remove old cached data:
-# sudo docker builder prune -a -f
-
 # --- Mandatory ---
-# Description of 4 services and global variable with network
-# === Global variable with network === :
-# 1. Contains internal IP addresses of the containers and link services
-# 2. The last is network which is mandatory for all services
-
-# === Service config-automator === :
-# Adjusting the file "PSTRootConfig.xml" by changing the IP address - important for mySQL
-
-# === Service mySQL_8 === :
-# Creates container and DTP database from script (dockerMysql/create.sql)
-
-# === Service mongoDB === :
-# Needed for DTP Extension Designer
-
-# === Service DTP === :
-# Creates the DTP and manages some files - see "dockerDTP/Dockerfile"
-# Adjusting the Tomcat server.xml certificates
-# Adjusting the certificates for Extension Designer - file ssl.config.js
-# Adding third-party library for mySQL
-
 # Certificates - you need to use SIGNED certificates, not self-signed
-# "dockerDTP_cert2026\yourPrivateKey.crt"
-# "dockerDTP_cert2026\yourPrivateKey.key"
+# "dockerDTP\_cert2026\yourPrivateKey.crt"
+# "dockerDTP\_cert2026\yourPrivateKey.key"
 
 # -- Create Images and Containers -- (3 options, use one of them)
 # 1. Run command from folder where file exists in WSL using: sudo docker compose -f composedtp2026.2_mySQL8.yaml up --build --force-recreate
@@ -41,10 +15,12 @@ name: services_2026.2_DTP-mongoDB-mySQL
 
 # 1. Global variables
 x-config:
+  # Custom address for mySQL and file PSTRootConfig.xml
   subnet: &subnet "172.31.0.0/16"
   gateway: &gateway "172.31.0.1"
+  # host path and where are files and PSTRootConfig.xml
   dtpConfigVolume: &dtpConfigVolume "/mnt/yourHostPath/folderWithThisYamlFile/dockerDTP/conf:/usr/local/parasoft/data/conf"
-  # The file will be configured with the above IP addresses to work properly with MySQL.
+  # The file will be configured in service "config-automator" with the above gateway address to connect mySQL.
   configFilename: &configFilename "PSTRootConfig.xml"
 
 services:
@@ -105,6 +81,7 @@ services:
         echo "Configuration step complete!"
 # Service mySQL 8
   mySQL_8:
+    # folder contains script and Dockerfile
     build: ./dockerMysql
     image: i_support/mysql8_2026.2
     container_name: c_mysql8_2026.2
@@ -116,7 +93,7 @@ services:
       
 # Service MongoDB      
   mongoDB:
-    # it works in 2026 11 with DTP 2026.2 which was 9.0.4
+    # it works in 2026-11 with DTP 2026.2 which was 9.0.4
     #image: mongo:latest
     image: mongo:8.0
     container_name: mongodb
@@ -128,6 +105,7 @@ services:
       
 # service DTP      
   DTP2026.2:    
+    # folder contains files, certificates, Dockerfile
     build: ./dockerDTP
     image: i_support/dtp2026.2
     container_name: c_dtp2026.2
@@ -142,7 +120,7 @@ services:
       - "2002:2002"
       - "443:443"
     volumes:
-      # Uncomment below docker.sock if you are not in virtualize environment
+      # Uncomment below docker.sock if you are not in virtualize environment - permanent machineID
       #- /var/run/docker.sock:/var/run/docker.sock 
       - ./container/data:/usr/local/parasoft/data
       - *dtpConfigVolume
